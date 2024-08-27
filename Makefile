@@ -6,6 +6,7 @@ CFLAGS =		-Wall -Wextra -Werror -g $(INCLUDES)
 INCLUDES=		-I ./src/utils/headers -I /usr/include/c++/11 -I /usr/include/x86_64-linux-gnu/c++/11 -L /usr/lib/gcc/x86_64-linux-gnu/11
 LIBFT_DIR =		src/utils/libft
 LIBFT =			$(LIBFT_DIR)/libft.a
+MLX_FLAGS =		-lmlx -framework OpenGL -framework AppKit
 
 SRCS =			src/checkers/map_checker.c \
 				# src/checkers/player_checker.c \
@@ -21,7 +22,7 @@ BONUS_OBJ =		$(BONUS_SRC:.c=.o) $(SRCS:.c=.o)
 all:			$(NAME)
 
 $(NAME):		$(OBJS) $(LIBFT)
-				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+				@$(CC) $(CFLAGS) $(MLX_FLAGS) -o $(NAME) $(OBJS) $(LIBFT)
 
 $(BONUS):		$(BONUS_OBJ) $(OBJS) $(LIBFT)
 				@$(CC) $(CFLAGS) -o $(BONUS) $(BONUS_OBJ) $(LIBFT)
