@@ -3,7 +3,7 @@ BONUS =			bonus
 CC =			gcc
 AR =			ar rcs
 CFLAGS =		-Wall -Wextra -Werror -g $(INCLUDES)
-INCLUDES =		-I ./src/utils/headers -I $(LIBFT_DIR) -I /usr/include/c++/11 -I /usr/include/x86_64-linux-gnu/c++/11
+INCLUDES=		-I ./src/utils/headers -I /usr/include/c++/11 -I /usr/include/x86_64-linux-gnu/c++/11 -L /usr/lib/gcc/x86_64-linux-gnu/11
 LIBFT_DIR =		src/utils/libft
 LIBFT =			$(LIBFT_DIR)/libft.a
 
@@ -18,12 +18,12 @@ OBJS =			$(SRCS:.c=.o) $(SRC:.c=.o)
 
 BONUS_OBJ =		$(BONUS_SRC:.c=.o) $(SRCS:.c=.o)
 
-all:			$(NAME) $(BONUS)
+all:			$(NAME)
 
 $(NAME):		$(OBJS) $(LIBFT)
 				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
 
-$(BONUS):		$(BONUS_OBJ) $(LIBFT)
+$(BONUS):		$(BONUS_OBJ) $(OBJS) $(LIBFT)
 				@$(CC) $(CFLAGS) -o $(BONUS) $(BONUS_OBJ) $(LIBFT)
 
 $(LIBFT):
