@@ -1,0 +1,11 @@
+.vscode/
+# tester/
+*.out
+*.o
+*.a
+*.sh
+main.c
+push_swap
+# checker_linux
+# push_swap_tester/
+# push_swap_visualizer/

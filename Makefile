@@ -3,32 +3,16 @@ BONUS =			bonus
 CC =			gcc
 AR =			ar rcs
 CFLAGS =		-Wall -Wextra -Werror -g $(INCLUDES)
-INCLUDES=		-I ./src/utils/headers -I /usr/include/c++/11 -I /usr/include/x86_64-linux-gnu/c++/11 -L /usr/lib/gcc/x86_64-linux-gnu/11
+INCLUDES =		-I ./src/utils/headers -I $(LIBFT_DIR) -I /usr/include/c++/11 -I /usr/include/x86_64-linux-gnu/c++/11
 LIBFT_DIR =		src/utils/libft
 LIBFT =			$(LIBFT_DIR)/libft.a
 
-SRCS =			src/commands/push_commands.c \
-				src/commands/reverse_commands.c \
-				src/commands/rotate_commands.c \
-				src/commands/swap_commands.c \
-				src/errors/errors.c \
-				src/helpers/atoi_modified.c \
-				src/helpers/check_duplicates.c \
-				src/helpers/check_sorted.c \
-				src/helpers/free.c \
-				src/helpers/stack_traversal.c \
-				src/helpers/sort.c \
-				src/processors/algorithm.c \
-				src/processors/calculations.c \
-				src/processors/pre_process.c \
-				src/processors/process.c \
-				src/processors/rotate_stacks.c \
-				src/processors/sort.c \
-				src/processors/stack.c \
+SRCS =			src/checkers/map_checker.c \
+				# src/checkers/player_checker.c \
 
-SRC =			src/push_swap.c
+SRC =			src/so_long.c \
 
-BONUS_SRC =		src/checker/checker.c \
+BONUS_SRC =		
 
 OBJS =			$(SRCS:.c=.o) $(SRC:.c=.o)
 
@@ -39,7 +23,7 @@ all:			$(NAME) $(BONUS)
 $(NAME):		$(OBJS) $(LIBFT)
 				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
 
-$(BONUS):		$(BONUS_OBJ) $(OBJS) $(LIBFT)
+$(BONUS):		$(BONUS_OBJ) $(LIBFT)
 				@$(CC) $(CFLAGS) -o $(BONUS) $(BONUS_OBJ) $(LIBFT)
 
 $(LIBFT):
