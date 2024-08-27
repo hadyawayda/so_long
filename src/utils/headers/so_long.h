@@ -5,5 +5,6 @@
 #include <unistd.h>
 #include <limits.h>
 
+bool	check_map(char *argv);
 
 #endif
