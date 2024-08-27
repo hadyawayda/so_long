@@ -2,6 +2,7 @@
 #define SO_LONG_H
 
 #include "libft.h"
+#include <mlx.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdbool.h>
