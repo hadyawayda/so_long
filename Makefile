@@ -6,11 +6,12 @@ CFLAGS =		-g $(INCLUDES)
 INCLUDES=		-I ./src/utils/headers -I ./src/utils/minilibx-linux -I /usr/include/c++/11 -I /usr/include/x86_64-linux-gnu/c++/11 -L /usr/lib/gcc/x86_64-linux-gnu/11
 LIBFT_DIR =		src/utils/libft
 LIBFT =			$(LIBFT_DIR)/libft.a
-MLX_FLAGS =		-L ./src/utils/minilibx-linux -lmlx -lX11 -lXext -lXrender -lm
+MLX_FLAGS =		-L ./src/utils/minilibx-linux -L /usr/lib/X11 -lmlx -lX11 -lXext -lXrender -lm
 
 SRCS =			src/checkers/map_checker.c \
-				# src/checkers/player_checker.c \
 				src/controls/keyboard.c \
+				src/renderers/map_renderer.c \
+				# src/checkers/player_checker.c \
 
 SRC =			src/main.c \
 

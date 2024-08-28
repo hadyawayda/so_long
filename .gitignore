@@ -4,7 +4,7 @@
 *.o
 *.a
 *.sh
-main.c
+# main.c
 push_swap
 # checker_linux
 # push_swap_tester/
