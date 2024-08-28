@@ -1,78 +1,78 @@
 #include "../utils/headers/so_long.h"
 
-// Function to count the number of lines in the map
-int	count_map_lines(char *file)
+int	count_map_lines(int fd)
 {
-	int		fd;
 	int		lines;
 	char	*line;
 
 	lines = 0;
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (0);
 	line = get_next_line(fd);
 	while (line)
 	{
-		lines++;
+		if (ft_strlen(line) > 1 || (ft_strlen(line) == 1 && line[0] != '\n'))
+			lines++;
 		free(line);
 		line = get_next_line(fd);
 	}
-	close(fd);
+	lseek(fd, 0, SEEK_SET);
 	return (lines);
 }
 
-void print_map_line(char *line)
+void	parse_map_columns(int fd, t_game *game)
 {
-	printf("Line: %s\n", line);
+	int		i;
+	char	*line;
+
+	i = 0;
+	while ((line = get_next_line(fd)))
+	{
+		if (!line)
+			break;
+		if (line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
+		game->map[i] = line;
+		i++;
+	}
+	game->map[i] = NULL;
 }
 
-int	check_map(char *file, t_game *game)
+int	parse_map_lines(char *file, t_game *game)
 {
 	int		fd;
-	char	*line;
-	int		i;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (0); // Failed to open file
-
-	// Get the number of lines in the map
-	game->map_height = count_map_lines(file);
+		return (0);
+	game->map_height = count_map_lines(fd);
 	if (game->map_height == 0)
-		return (0); // Empty or invalid file
-
-	// Allocate memory for the map
+		return (0);
 	game->map = malloc(sizeof(char *) * (game->map_height + 1));
 	if (!game->map)
-		return (0); // Allocation failed
-
-	i = 0;
-	line = get_next_line(fd);
-	while (line)
-	{
-		// Remove the newline character from the end of the line, if present
-		if (line[ft_strlen(line) - 1] == '\n')
-			line[ft_strlen(line) - 1] = '\0';
-
-		game->map[i] = line;
-
-		// Set map width for the first line
-		if (i == 0)
-			game->map_width = ft_strlen(line);
-
-		// Ensure all lines have the same width
-		if ((int)ft_strlen(line) != game->map_width)
-		{
-			free(line);
-			return (0); // Not a rectangular map
-		}
-		print_map_line(line);
-		i++;
-		line = get_next_line(fd);
-	}
-	game->map[i] = NULL; // Null-terminate the map array
+		return (0);
+	parse_map_columns(fd, game);
 	close(fd);
+	return (1);
+}
 
+int	check_map_rectangular(t_game *game)
+{
+	int i;
+	int map_width;
+	int line_len;
+
+	i = 1;
+	if (game->map == NULL || game->map_height == 0)
+		return (0);
+	map_width = ft_strlen(game->map[0]) - 1;
+	while (i < game->map_height)
+	{
+		line_len = ft_strlen(game->map[i]) - 1;
+		if (i == game->map_height - 1)
+			line_len = line_len + 1;
+		if (line_len != map_width)
+			return (0);
+		i++;
+	}
+	game->map_width = map_width;
 	return (1);
 }

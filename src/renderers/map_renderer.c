@@ -32,7 +32,6 @@ void	load_textures(t_game *game)
 
 void	render_tile(t_game *game, int x, int y)
 {
-	printf("Tile: %c\n", game->map[y][x]);
 	if (game->map[y][x] == '1')
 		mlx_put_image_to_window(game->mlx_ptr, game->window, game->img_wall, x * TILE_SIZE, y * TILE_SIZE);
 	else if (game->map[y][x] == '0')
@@ -50,16 +49,13 @@ void	render_map(t_game *game)
 	int	x;
 	int	y;
 
+    mlx_clear_window(game->mlx_ptr, game->window);
 	y = 0;
-	printf("map height: %d\n", game->map_height);
 	while (y < game->map_height)
 	{
 		x = 0;
 		while (x < game->map_width)
-		{
-			render_tile(game, x, y);
-			x++;
-		}
+			render_tile(game, x++, y);
 		y++;
 	}
 }

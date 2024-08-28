@@ -10,8 +10,9 @@ MLX_FLAGS =		-L ./src/utils/minilibx-linux -L /usr/lib/X11 -lmlx -lX11 -lXext -l
 
 SRCS =			src/checkers/map_checker.c \
 				src/controls/keyboard.c \
+				src/controls/movement.c \
 				src/renderers/map_renderer.c \
-				# src/checkers/player_checker.c \
+				src/helpers/window.c \
 
 SRC =			src/main.c \
 

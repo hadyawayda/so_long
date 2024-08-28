@@ -3,9 +3,9 @@
 *.out
 *.o
 *.a
-*.sh
+# *.sh
 # main.c
-push_swap
+so_long
 # checker_linux
 # push_swap_tester/
 # push_swap_visualizer/
