@@ -20,7 +20,7 @@ typedef struct s_game
 	void	*mlx_ptr;
 	void	*window;
 	void	*img_wall;
-	void	*img_player;
+	void	**img_player;
 	void	*img_collectible;
 	void	*img_exit;
 	void	*img_empty;
