@@ -37,6 +37,7 @@ typedef struct s_game
 	void	*window;
 	void	*img_wall;
 	t_image	img_player[6];
+	t_image	img_enemy[6];
 	t_enemy	enemy;
 	void	*img_collectible;
 	void	*img_exit;

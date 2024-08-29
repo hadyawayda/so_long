@@ -2,7 +2,6 @@
 
 int move_enemy(t_game *game)
 {
-    printf("Enemy position: (%d, %d)\n", game->enemy.x, game->enemy.y);
     int new_x = game->enemy.x + game->enemy.direction;
 
     if (new_x > 12 || new_x < 5)

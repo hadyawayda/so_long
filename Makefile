@@ -12,7 +12,9 @@ SRCS =			src/checkers/map_checker.c \
 				src/controls/enemy.c \
 				src/controls/keyboard.c \
 				src/controls/movement.c \
-				src/renderers/map_renderer.c \
+				src/renderers/animators.c \
+				src/renderers/map.c \
+				src/renderers/players.c \
 				src/helpers/window.c \
 
 SRC =			src/main.c \
