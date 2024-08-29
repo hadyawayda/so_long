@@ -24,7 +24,6 @@ typedef struct s_image
 
 typedef struct s_enemy
 {
-	void    *img_ptr;
     int		x;
     int		y;
     int		direction;

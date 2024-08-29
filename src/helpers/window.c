@@ -21,7 +21,6 @@ void	initialize_assets(t_game *game)
     }
 }
 
-// remove key press/release events if memory leaks persist
 void	load_game(t_game *game)
 {
 	game->enemy.x = 5;
@@ -39,16 +38,52 @@ void	load_game(t_game *game)
 	mlx_loop(game->mlx_ptr);
 }
 
+void	window_cleaner(t_game *game)
+{
+    if (game->img_wall)
+        mlx_destroy_image(game->mlx_ptr, game->img_wall);
+    if (game->img_collectible)
+        mlx_destroy_image(game->mlx_ptr, game->img_collectible);
+    if (game->img_exit)
+        mlx_destroy_image(game->mlx_ptr, game->img_exit);
+    if (game->img_empty)
+        mlx_destroy_image(game->mlx_ptr, game->img_empty);
+    if (game->window)
+        mlx_destroy_window(game->mlx_ptr, game->window);
+    if (game->mlx_ptr)
+        mlx_destroy_display(game->mlx_ptr);
+    free(game->mlx_ptr);
+}
+
 void	cleanup_game(t_game *game)
 {
-	// free_images(game);
+	int i;
+
+    if (game->map)
+    {
+        for (i = 0; i < game->map_height; i++)
+        {
+            if (game->map[i])
+                free(game->map[i]);
+        }
+        free(game->map);
+    }
+    for (i = 0; i < 6; i++)
+    {
+        if (game->img_player[i].img_ptr)
+            mlx_destroy_image(game->mlx_ptr, game->img_player[i].img_ptr);
+    }
+    for (i = 0; i < 6; i++)
+    {
+        if (game->img_enemy[i].img_ptr)
+            mlx_destroy_image(game->mlx_ptr, game->img_enemy[i].img_ptr);
+    }
+	window_cleaner(game);
 }
 
 int	close_game(t_game *game)
 {
 	cleanup_game(game);
-	mlx_destroy_window(game->mlx_ptr, game->window);
-	mlx_destroy_display(game->mlx_ptr);
 	exit(0);
 	return (0);
 }
