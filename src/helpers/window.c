@@ -39,9 +39,14 @@ void	load_game(t_game *game)
 	mlx_loop(game->mlx_ptr);
 }
 
+void	cleanup_game(t_game *game)
+{
+	// free_images(game);
+}
+
 int	close_game(t_game *game)
 {
-	// cleanup_game(game);
+	cleanup_game(game);
 	mlx_destroy_window(game->mlx_ptr, game->window);
 	mlx_destroy_display(game->mlx_ptr);
 	exit(0);

@@ -9,6 +9,7 @@ LIBFT =			$(LIBFT_DIR)/libft.a
 MLX_FLAGS =		-L ./src/utils/minilibx-linux -L /usr/lib/X11 -lmlx -lX11 -lXext -lXrender -lm
 
 SRCS =			src/checkers/map_checker.c \
+				src/checkers/path_finder.c \
 				src/controls/enemy.c \
 				src/controls/keyboard.c \
 				src/controls/movement.c \

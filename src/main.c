@@ -10,7 +10,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error\nInvalid number of arguments\n", 2);
 		return (1);
 	}
-	if (!parse_map_lines(argv[1], &game) || !check_map_rectangular(&game))
+	if (!parse_map_lines(argv[1], &game) || !validate_map(&game))
 	{
 		ft_putstr_fd("Error\nInvalid map\n", 2);
 		return (1);

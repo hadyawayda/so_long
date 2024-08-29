@@ -55,7 +55,7 @@ typedef struct s_game
 int			update(t_game *game);
 int			close_game(t_game *game);
 int			move_enemy(t_game *game);
-int			check_map_rectangular(t_game *game);
+int			validate_map(t_game *game);
 int			key_press(int keycode, t_game *game);
 int			key_release(int keycode, t_game *game);
 int			parse_map_lines(char *file, t_game *game);
@@ -65,7 +65,6 @@ void		load_game(t_game *game);
 void		render_map(t_game *game);
 void		cleanup_game(t_game *game);
 void		load_textures(t_game *game);
-void		init_collectibles(t_game *game);
 void		display_move_count(t_game *game);
 void		initialize_player_position(t_game *game);
 void		move_player(t_game *game, int new_x, int new_y);

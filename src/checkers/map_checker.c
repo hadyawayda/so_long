@@ -2,8 +2,8 @@
 
 int	count_map_lines(int fd)
 {
-	int		lines;
 	char	*line;
+	int		lines;
 
 	lines = 0;
 	line = get_next_line(fd);
@@ -20,8 +20,8 @@ int	count_map_lines(int fd)
 
 void	parse_map_columns(int fd, t_game *game)
 {
-	int		i;
 	char	*line;
+	int		i;
 
 	i = 0;
 	while ((line = get_next_line(fd)))
@@ -54,25 +54,3 @@ int	parse_map_lines(char *file, t_game *game)
 	return (1);
 }
 
-int	check_map_rectangular(t_game *game)
-{
-	int i;
-	int map_width;
-	int line_len;
-
-	i = 1;
-	if (game->map == NULL || game->map_height == 0)
-		return (0);
-	map_width = ft_strlen(game->map[0]) - 1;
-	while (i < game->map_height)
-	{
-		line_len = ft_strlen(game->map[i]) - 1;
-		if (i == game->map_height - 1)
-			line_len = line_len + 1;
-		if (line_len != map_width)
-			return (0);
-		i++;
-	}
-	game->map_width = map_width;
-	return (1);
-}
