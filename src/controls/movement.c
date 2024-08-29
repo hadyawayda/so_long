@@ -49,6 +49,5 @@ void	move_player(t_game *game, int new_x, int new_y)
     game->player_y = new_y;
     game->map[new_y][new_x] = 'P';
     game->moves++;
-    render_map(game);
 	display_move_count(game);
 }

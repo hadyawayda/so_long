@@ -22,6 +22,5 @@ int	main(int argc, char **argv)
 	if (!game.window)
 		return (1);
 	load_game(&game);
-	// cleanup_game(&game);
 	return (0);
 }

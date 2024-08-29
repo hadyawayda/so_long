@@ -27,7 +27,7 @@ typedef struct s_enemy
 	void    *img_ptr;
     int		x;
     int		y;
-    int		direction; // 1 for moving right, -1 for moving left
+    int		direction;
 }           t_enemy;
 
 typedef struct s_game
@@ -53,6 +53,7 @@ typedef struct s_game
 
 int			update(t_game *game);
 int			close_game(t_game *game);
+int			move_enemy(t_game *game);
 int			check_map_rectangular(t_game *game);
 int			key_press(int keycode, t_game *game);
 int			key_release(int keycode, t_game *game);
@@ -61,7 +62,6 @@ int			handle_keypress(int keycode, t_game *game);
 
 void		load_game(t_game *game);
 void		render_map(t_game *game);
-void		move_enemy(t_game *game);
 void		cleanup_game(t_game *game);
 void		load_textures(t_game *game);
 void		init_collectibles(t_game *game);
