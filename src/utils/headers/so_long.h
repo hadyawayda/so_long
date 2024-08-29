@@ -13,6 +13,14 @@
 # include <unistd.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <time.h>
+
+typedef struct s_image
+{
+    void    *img_ptr;
+    int     width;
+    int     height;
+}			t_image;
 
 typedef struct s_game
 {
@@ -20,7 +28,7 @@ typedef struct s_game
 	void	*mlx_ptr;
 	void	*window;
 	void	*img_wall;
-	void	**img_player;
+	t_image	img_player[6];
 	void	*img_collectible;
 	void	*img_exit;
 	void	*img_empty;
@@ -31,10 +39,14 @@ typedef struct s_game
 	int		collectibles;
 	int		collected;
 	int		moves;
+	int     keys[65565];
 }			t_game;
 
+int			update(t_game *game);
 int			close_game(t_game *game);
 int			check_map_rectangular(t_game *game);
+int			key_press(int keycode, t_game *game);
+int			key_release(int keycode, t_game *game);
 int			parse_map_lines(char *file, t_game *game);
 int			handle_keypress(int keycode, t_game *game);
 

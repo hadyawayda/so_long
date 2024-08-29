@@ -2,7 +2,7 @@
 
 make re
 
-./so_long src/utils/maps/map1.ber
+./so_long src/utils/maps/map2.ber
 
 # ARG=7 6 5
 # ARG="7 6 5"
