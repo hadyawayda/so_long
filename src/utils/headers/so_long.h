@@ -22,6 +22,14 @@ typedef struct s_image
     int     height;
 }			t_image;
 
+typedef struct s_enemy
+{
+	void    *img_ptr;
+    int		x;
+    int		y;
+    int		direction; // 1 for moving right, -1 for moving left
+}           t_enemy;
+
 typedef struct s_game
 {
 	char	**map;
@@ -29,6 +37,7 @@ typedef struct s_game
 	void	*window;
 	void	*img_wall;
 	t_image	img_player[6];
+	t_enemy	enemy;
 	void	*img_collectible;
 	void	*img_exit;
 	void	*img_empty;
@@ -52,6 +61,7 @@ int			handle_keypress(int keycode, t_game *game);
 
 void		load_game(t_game *game);
 void		render_map(t_game *game);
+void		move_enemy(t_game *game);
 void		cleanup_game(t_game *game);
 void		load_textures(t_game *game);
 void		init_collectibles(t_game *game);

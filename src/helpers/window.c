@@ -28,6 +28,7 @@ void	load_game(t_game *game)
 	mlx_hook(game->window, 2, 1L << 0, &key_press, game);
     mlx_hook(game->window, 3, 1L << 1, &key_release, game);
 	mlx_key_hook(game->window, handle_keypress, game);
+	move_enemy(game);
 	mlx_hook(game->window, DestroyNotify, StructureNotifyMask, &close_game, game);
 	mlx_loop(game->mlx_ptr);
 }

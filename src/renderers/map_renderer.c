@@ -38,6 +38,7 @@ void	load_textures(t_game *game)
 	game->img_collectible = mlx_xpm_file_to_image(game->mlx_ptr, "./src/utils/textures/tilesets/Cute_Fantasy_Free/Decoration/Chest_Resized.xpm", &width, &height);
 	game->img_exit = mlx_xpm_file_to_image(game->mlx_ptr, "./src/utils/textures/tilesets/mystic_woods_free_2.2/sprites/tilesets/walls/wooden_door_b.xpm", &width, &height);
 	load_player(game, width, height);
+	// game->enemy.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, "./src/utils/textures/tilesets/Cute_Fantasy_Free/Enemies/Images/Skeleton_25.xpm", &width, &height);
 }
 
 void	render_tile(t_game *game, int x, int y)
@@ -68,4 +69,5 @@ void	render_map(t_game *game)
 			render_tile(game, x++, y);
 		y++;
 	}
+	// mlx_put_image_to_window(game->mlx_ptr, game->window, game->enemy.img_ptr, game->enemy.x * TILE_SIZE, game->enemy.y * TILE_SIZE);
 }
