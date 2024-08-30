@@ -32,3 +32,10 @@ int	update(t_game *game)
 	display_move_count(game);
 	return (0);
 }
+
+int	close_game(t_game *game)
+{
+	cleanup_game(game);
+	exit(0);
+	return (0);
+}

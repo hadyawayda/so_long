@@ -2,15 +2,23 @@
 
 int move_enemy(t_game *game)
 {
-    int new_x = game->enemy.x + game->enemy.direction;
+    int direction = rand() % 4;
+    int new_x = game->enemy.x;
+    int new_y = game->enemy.y;
 
-    if (new_x > 12 || new_x < 5)
+    if (direction == 0 && new_y > 0 && game->map[new_y - 1][new_x] != '1')
+        new_y--;
+    else if (direction == 1 && new_y < game->map_height - 1 && game->map[new_y + 1][new_x] != '1')
+        new_y++;
+    else if (direction == 2 && new_x > 0 && game->map[new_y][new_x - 1] != '1')
+        new_x--;
+    else if (direction == 3 && new_x < game->map_width - 1 && game->map[new_y][new_x + 1] != '1')
+        new_x++;
+    if (game->map[new_y][new_x] != '1')
     {
-        game->enemy.direction *= -1;
-        new_x = game->enemy.x + game->enemy.direction;
-    }
-    if (new_x >= 0 && new_x < game->map_width && game->map[game->enemy.y][new_x] != '1')
         game->enemy.x = new_x;
+        game->enemy.y = new_y;
+    }
     if (game->enemy.x == game->player_x && game->enemy.y == game->player_y)
     {
         printf("You lost!\n");

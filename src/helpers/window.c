@@ -21,15 +21,25 @@ void	initialize_assets(t_game *game)
     }
 }
 
+void spawn_enemy(t_game *game)
+{
+    srand(time(NULL));
+    int x, y;
+    
+    do {
+        x = rand() % game->map_width;
+        y = rand() % game->map_height;
+    } while (game->map[y][x] == '1' || game->map[y][x] == 'P'); // Ensure not spawning on walls or player
+
+    game->enemy.x = x;
+    game->enemy.y = y;
+}
+
 void	load_game(t_game *game)
 {
-	game->enemy.x = 5;
-	game->enemy.y = 4;
-	game->enemy.direction = 1;
-
 	load_textures(game);
-	render_map(game);
 	initialize_assets(game);
+	spawn_enemy(game);
 	mlx_loop_hook(game->mlx_ptr, &update, game);
 	mlx_hook(game->window, 2, 1L << 0, &key_press, game);
     mlx_hook(game->window, 3, 1L << 1, &key_release, game);
@@ -79,11 +89,4 @@ void	cleanup_game(t_game *game)
             mlx_destroy_image(game->mlx_ptr, game->img_enemy[i].img_ptr);
     }
 	window_cleaner(game);
-}
-
-int	close_game(t_game *game)
-{
-	cleanup_game(game);
-	exit(0);
-	return (0);
 }
