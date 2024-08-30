@@ -1,7 +1,6 @@
 FLOOD_FILL
 FIX MAP BORDERS CHECK
 BASIC CHECKS + ADVANCED CHECK (REFER TO EVALUATION SHEET)
-fix players not showing on green background
 fix checkers
 
 NORMINETTE
@@ -12,3 +11,4 @@ CLEAN THE FILES AND FOLDERS
 SPRITE ANIMATION -- Done
 ENEMY PATROL -- Done
 MEMORY LEAKS CHECK -- Done
+fix players not showing on green background -- Done

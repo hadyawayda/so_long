@@ -20,7 +20,7 @@ void	render_player(t_game *game)
 	static int last_time = 0;
 	int current_time = clock();
 
-	if ((current_time - last_time) > CLOCKS_PER_SEC / 24)
+	if ((current_time - last_time) > CLOCKS_PER_SEC / 12)
 	{
 		frame = (frame + 1) % 6;
 		last_time = current_time;
@@ -34,7 +34,7 @@ void	render_enemy(t_game *game)
 	static int last_time = 0;
 	int current_time = clock();
 
-	if ((current_time - last_time) > CLOCKS_PER_SEC / 16)
+	if ((current_time - last_time) > CLOCKS_PER_SEC / 6)
 	{
 		frame = (frame + 1) % 6;
 		last_time = current_time;
