@@ -150,7 +150,7 @@ static char *result[] = {
 "m. c #CFC2A8",
 "M. c #F9CDA1",
 "N. c #FFD5A3",
-"B. c None",
+"B. c #3E8948",
 /* pixels */
 "B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.",
 "B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.B.",
