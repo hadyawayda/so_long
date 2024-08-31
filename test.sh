@@ -1,8 +1,11 @@
 #!/bin/bash
 
 make re
+make re
 
-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./so_long src/utils/maps/map2.ber
+# ./so_long assets/maps/map1.ber
+# ./so_long assets/maps/map2.ber
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./so_long assets/maps/map2.ber
 
 # ARG=7 6 5
 # ARG="7 6 5"

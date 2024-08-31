@@ -1,33 +1,46 @@
-# ifndef SO_LONG_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hawayda <hawayda@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/29 19:35:39 by hawayda           #+#    #+#             */
+/*   Updated: 2024/08/30 22:45:06 by hawayda          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SO_LONG_H
 # define SO_LONG_H
 
 # define TILE_SIZE 48
 
+# include "../../../assets/minilibx-linux/mlx.h"
+# include "ft_printf.h"
 # include "libft.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <fcntl.h>
 # include <limits.h>
-# include <mlx.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <unistd.h>
-# include <X11/X.h>
-# include <X11/keysym.h>
 # include <time.h>
+# include <unistd.h>
 
 typedef struct s_image
 {
-    void    *img_ptr;
-    int     width;
-    int     height;
+	void	*img_ptr;
+	int		width;
+	int		height;
 }			t_image;
 
 typedef struct s_enemy
 {
-    int		x;
-    int		y;
-    int		direction;
-}           t_enemy;
+	int		x;
+	int		y;
+	int		direction;
+}			t_enemy;
 
 typedef struct s_game
 {
@@ -48,13 +61,14 @@ typedef struct s_game
 	int		collectibles;
 	int		collected;
 	int		moves;
-	int     keys[65565];
+	int		keys[65565];
 }			t_game;
 
 int			update(t_game *game);
 int			close_game(t_game *game);
 int			move_enemy(t_game *game);
 int			validate_map(t_game *game);
+int			check_path_to_exit(t_game *game);
 int			key_press(int keycode, t_game *game);
 int			key_release(int keycode, t_game *game);
 int			parse_map_lines(char *file, t_game *game);

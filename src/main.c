@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hawayda <hawayda@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/29 19:35:32 by hawayda           #+#    #+#             */
+/*   Updated: 2024/08/29 19:48:32 by hawayda          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "utils/headers/so_long.h"
 
 int	main(int argc, char **argv)
@@ -18,7 +30,8 @@ int	main(int argc, char **argv)
 	game.mlx_ptr = mlx_init();
 	if (!game.mlx_ptr)
 		return (1);
-	game.window = mlx_new_window(game.mlx_ptr, game.map_width * TILE_SIZE, game.map_height * TILE_SIZE, "so_long");
+	game.window = mlx_new_window(game.mlx_ptr, game.map_width * TILE_SIZE,
+			game.map_height * TILE_SIZE, "so_long");
 	if (!game.window)
 		return (1);
 	load_game(&game);

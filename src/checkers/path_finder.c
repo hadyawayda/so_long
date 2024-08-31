@@ -1,98 +1,90 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_finder.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hawayda <hawayda@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/29 21:34:26 by hawayda           #+#    #+#             */
+/*   Updated: 2024/08/29 21:50:55 by hawayda          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../utils/headers/so_long.h"
 
-int	check_map_rectangular(t_game *game)
+void	flood_fill(char **map, int x, int y, t_game *game)
 {
-	int i;
-	int map_width;
-	int line_len;
-
-	i = 1;
-	if (game->map == NULL || game->map_height == 0)
-		return (0);
-	map_width = ft_strlen(game->map[0]) - 1;
-	while (i < game->map_height)
+	if (x < 0 || x >= game->map_width || y < 0 || y >= game->map_height
+		|| map[y][x] == '1' || map[y][x] == 'V')
+		return ;
+	if (map[y][x] == 'E')
 	{
-		line_len = ft_strlen(game->map[i]) - 1;
-		if (i == game->map_height - 1)
-			line_len = line_len + 1;
-		if (line_len != map_width)
-			return (0);
-		i++;
+		map[y][x] = 'V';
+		return ;
 	}
-	game->map_width = map_width;
-	return (1);
+	map[y][x] = 'V';
+	flood_fill(map, x - 1, y, game);
+	flood_fill(map, x + 1, y, game);
+	flood_fill(map, x, y - 1, game);
+	flood_fill(map, x, y + 1, game);
 }
 
-int check_map_border(t_game *game)
+void	free_map_copy(char **map_copy, t_game *game)
 {
-    int i;
-    
-    // for (i = 0; i < game->map_width; i++)
-    // {
-    //     if (game->map[0][i] != '1' || game->map[game->map_height - 1][i] != '1')
-    //         return (0);
-    // }
-    // for (i = 0; i < game->map_height; i++)
-    // {
-    //     if (game->map[i][0] != '1' || game->map[i][game->map_width] != '1')
-    //         return (0);
-    // }
-    return (1);
+	int	i;
+
+	i = -1;
+	while (++i < game->map_height)
+		free(map_copy[i]);
+	free(map_copy);
 }
 
-void flood_fill(char **map, int x, int y)
+void	flood_fill_map(char **map_copy, t_game *game)
 {
-    if (map[y][x] == '1' || map[y][x] == 'V')
-        return;
+	int	i;
 
-    map[y][x] = 'V';
-    flood_fill(map, x + 1, y);
-    flood_fill(map, x - 1, y);
-    flood_fill(map, x, y + 1);
-    flood_fill(map, x, y - 1);
+	i = -1;
+	while (++i < game->map_height)
+		map_copy[i] = ft_strdup(game->map[i]);
+	flood_fill(map_copy, game->player_x, game->player_y, game);
 }
 
-int check_path_to_exit(t_game *game)
+int	check_map_copy(char **map_copy, t_game *game)
 {
-    // char **map_copy = malloc(sizeof(char *) * (game->map_height + 1));
-    // for (int i = 0; i < game->map_height; i++)
-    //     map_copy[i] = ft_strdup(game->map[i]);
-    // flood_fill(map_copy, game->player_x, game->player_y);
-    // for (int y = 0; y < game->map_height; y++)
-    // {
-    //     for (int x = 0; x < game->map_width; x++)
-    //     {
-    //         if (game->map[y][x] == 'E' && map_copy[y][x] != 'V')
-    //         {
-    //             for (int i = 0; i < game->map_height; i++)
-    //                 free(map_copy[i]);
-    //             free(map_copy);
-    //             return (0);
-    //         }
-    //     }
-    // }
-    // for (int i = 0; i < game->map_height; i++)
-    //     free(map_copy[i]);
-    // free(map_copy);
-    return (1);
+	int	y;
+	int	x;
+	int	result;
+
+	y = 0;
+	result = 1;
+	while (y < game->map_height)
+	{
+		x = 0;
+		while (x < game->map_width)
+		{
+			if (game->map[y][x] == 'E' && map_copy[y][x] != 'V')
+			{
+				result = 0;
+				break ;
+			}
+			x++;
+		}
+		if (result == 0)
+			break ;
+		y++;
+	}
+	return (result);
 }
 
-int validate_map(t_game *game)
+int	check_path_to_exit(t_game *game)
 {
-    if (!check_map_rectangular(game))
-    {
-        printf("Error: Map is not rectangular\n");
-        return (0);
-    }
-    if (!check_map_border(game))
-    {
-        printf("Error: Map is not surrounded by walls\n");
-        return (0);
-    }
-    if (!check_path_to_exit(game))
-    {
-        printf("Error: No valid path from player to exit\n");
-        return (0);
-    }
-    return (1);
+	char	**map_copy;
+	int		result;
+
+	result = 1;
+	map_copy = malloc(sizeof(char *) * (game->map_height + 1));
+	flood_fill_map(map_copy, game);
+	result = check_map_copy(map_copy, game);
+	free_map_copy(map_copy, game);
+	return (result);
 }

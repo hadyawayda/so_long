@@ -3,9 +3,11 @@
 *.out
 *.o
 *.a
-# *.sh
+*.sh
 # main.c
 so_long
 # checker_linux
 # push_swap_tester/
 # push_swap_visualizer/
+*.txt
+textures/
